@@ -1,0 +1,348 @@
+{% extends "base.html" %}
+
+{% block titulo_pagina %}
+Escala Mensal
+{% endblock %}
+
+{% block conteudo %}
+
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+
+    <div>
+
+        <h2>
+            <i class="bi bi-calendar-month"></i>
+            Escala Mensal
+        </h2>
+
+        <p class="text-muted mb-0">
+            {{ escala[1] }}/{{ escala[2] }}
+        </p>
+
+    </div>
+
+
+    <div class="d-flex flex-wrap gap-2">
+
+        <a
+            href="/escalas"
+            class="btn btn-secondary">
+
+            <i class="bi bi-arrow-left"></i>
+            Voltar
+
+        </a>
+
+
+        <a
+            href="/adicionar-dia-escala/{{ escala[0] }}"
+            class="btn btn-primary">
+
+            <i class="bi bi-plus-circle"></i>
+            Adicionar dia
+
+        </a>
+
+    </div>
+
+</div>
+
+
+<div class="card mb-4 shadow-sm">
+
+    <div class="card-header">
+
+        <strong>
+
+            <i class="bi bi-calendar-month"></i>
+
+            Escala de {{ escala[1] }}/{{ escala[2] }}
+
+        </strong>
+
+    </div>
+
+
+    <div class="card-body">
+
+        {% if dias %}
+
+        <div class="table-responsive">
+
+            <table class="table table-bordered table-hover align-middle">
+
+                <thead class="table-light">
+
+                    <tr>
+
+                        <th>
+                            Data
+                        </th>
+
+                        <th>
+                            Dia
+                        </th>
+
+                        <th>
+                            Culto
+                        </th>
+
+                        <th>
+                            Canto
+                        </th>
+
+                        <th>
+                            Pregador
+                        </th>
+
+                        <th>
+                            Oferta
+                        </th>
+
+                        <th>
+                            Professor ES
+                        </th>
+
+                        <th>
+                            Diretor ES
+                        </th>
+
+                        <th>
+                            Ações
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for dia in dias %}
+
+                    <tr>
+
+                        <!-- DATA -->
+
+                        <td class="text-nowrap">
+
+                            {{ dia[1] }}
+
+                        </td>
+
+
+                        <!-- DIA DA SEMANA -->
+
+                        <td>
+
+                            {{ dias_semana.get(dia[0], "-") }}
+
+                     <td>
+
+    {{ dias_semana[dia[0]] }}
+
+</td>
+
+                        <!-- TIPO DE CULTO -->
+
+                        <td>
+
+                            {{ dia[2] or "-" }}
+
+                        </td>
+
+
+                        <!-- CANTO -->
+
+                        <td>
+
+                            {% if dia[3] %}
+
+                                {{ nomes.get(dia[3], "-") }}
+
+                            {% else %}
+
+                                -
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <!-- PREGADOR -->
+
+                        <td>
+
+                            {% if dia[4] %}
+
+                                {{ nomes.get(dia[4], "-") }}
+
+                            {% else %}
+
+                                -
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <!-- OFERTA -->
+
+                        <td>
+
+                            {% if dia[5] %}
+
+                                {{ nomes.get(dia[5], "-") }}
+
+                            {% else %}
+
+                                -
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <!-- PROFESSOR ES -->
+
+                        <td>
+
+                            {% if dia[6] %}
+
+                                {{ nomes.get(dia[6], "-") }}
+
+                            {% else %}
+
+                                -
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <!-- DIRETOR ES -->
+
+                        <td>
+
+                            {% if dia[7] %}
+
+                                {{ nomes.get(dia[7], "-") }}
+
+                            {% else %}
+
+                                -
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <!-- AÇÕES -->
+
+                        <td class="text-nowrap">
+
+                            <a
+                                href="/editar-dia-escala/{{ dia[0] }}"
+                                class="btn btn-warning btn-sm"
+                                title="Editar">
+
+                                <i class="bi bi-pencil"></i>
+
+                            </a>
+
+
+                            <a
+                                href="/excluir-dia-escala/{{ dia[0] }}"
+                                class="btn btn-danger btn-sm"
+                                title="Excluir dia"
+                                onclick="return confirm('Deseja excluir este dia da escala?')">
+
+                                <i class="bi bi-trash"></i>
+
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <div class="text-muted small mt-2 d-md-none">
+
+            <i class="bi bi-arrow-left-right"></i>
+
+            Deslize a tabela para os lados para visualizar todas as informações.
+
+        </div>
+
+
+        {% else %}
+
+        <div class="text-center py-5">
+
+            <i
+                class="bi bi-calendar2-plus"
+                style="font-size:50px;">
+            </i>
+
+
+            <h5 class="mt-3">
+                Nenhum dia cadastrado
+            </h5>
+
+
+            <p class="text-muted">
+                Adicione os dias que terão culto neste mês.
+            </p>
+
+
+            <a
+                href="/adicionar-dia-escala/{{ escala[0] }}"
+                class="btn btn-primary">
+
+                <i class="bi bi-plus-circle"></i>
+
+                Adicionar primeiro dia
+
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+
+<div class="card shadow-sm">
+
+    <div class="card-body">
+
+        <h5>
+
+            <i class="bi bi-info-circle"></i>
+
+            Como funciona
+
+        </h5>
+
+        <p class="text-muted mb-0">
+
+            Adicione cada dia que terá culto e escolha os responsáveis
+            por Canto, Pregação, Oferta e Escola Sabatina.
+
+        </p>
+
+    </div>
+
+</div>
+
+{% endblock %}

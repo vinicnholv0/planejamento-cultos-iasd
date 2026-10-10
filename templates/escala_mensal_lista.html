@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+
+{% block titulo_pagina %}
+Escala Mensal
+{% endblock %}
+
+{% block conteudo %}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+    <div>
+        <h2>
+            <i class="bi bi-calendar3"></i>
+            Escala Mensal
+        </h2>
+
+        <p class="text-muted mb-0">
+            Planejamento dos cultos normais da igreja durante o mês.
+        </p>
+    </div>
+
+    <div class="d-flex gap-2">
+
+        <a href="/nova-escala-mensal" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i>
+            Nova Escala
+        </a>
+
+        <a href="/escalas" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i>
+            Voltar
+        </a>
+
+    </div>
+
+</div>
+
+
+{% if escalas_mensais %}
+
+<div class="row g-4">
+
+    {% for escala in escalas_mensais %}
+
+    <div class="col-md-6 col-lg-4">
+
+        <div class="card shadow-sm h-100">
+
+            <div class="card-body">
+
+                <div class="text-center mb-3">
+
+                    <i
+                        class="bi bi-calendar-check"
+                        style="font-size: 45px;">
+                    </i>
+
+                </div>
+
+                <h4 class="text-center">
+                    Escala Mensal
+                </h4>
+
+                <h5 class="text-center mt-3">
+
+                    {{ "%02d"|format(escala[1]) }}/{{ escala[2] }}
+
+                </h5>
+
+                {% if escala[3] %}
+
+                <p class="text-muted text-center mt-3">
+                    {{ escala[3] }}
+                </p>
+
+                {% endif %}
+
+                <div class="d-grid mt-4">
+
+                    <a
+                        href="/escala-mensal/{{ escala[0] }}"
+                        class="btn btn-primary">
+
+                        <i class="bi bi-eye"></i>
+                        Visualizar Escala
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% else %}
+
+<div class="card shadow-sm">
+
+    <div class="card-body text-center py-5">
+
+        <i
+            class="bi bi-calendar-x"
+            style="font-size: 60px;">
+        </i>
+
+        <h4 class="mt-3">
+            Nenhuma escala mensal cadastrada
+        </h4>
+
+        <p class="text-muted">
+            Ainda não existe uma escala mensal cadastrada.
+        </p>
+
+        <a
+            href="/nova-escala-mensal"
+            class="btn btn-primary mt-3">
+
+            <i class="bi bi-plus-circle"></i>
+            Criar primeira escala
+
+        </a>
+
+    </div>
+
+</div>
+
+{% endif %}
+
+{% endblock %}

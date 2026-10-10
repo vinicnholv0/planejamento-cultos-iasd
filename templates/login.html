@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login - Planejamento de Cultos IASD</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div class="login-box">
+
+    <img src="{{ url_for('static', filename='img/logo.png') }}"
+         alt="Logo IASD"
+         class="logo-login">
+
+    <h1>Planejamento de Cultos IASD</h1>
+
+    <p>Faça login para continuar</p>
+
+    {% if erro %}
+        <div class="alert alert-danger">
+            {{ erro }}
+        </div>
+    {% endif %}
+
+    <form method="POST">
+
+        <input
+            type="text"
+            name="usuario"
+            placeholder="Usuário"
+            required>
+
+        <input
+            type="password"
+            name="senha"
+            placeholder="Senha"
+            required>
+
+        <button type="submit">
+            Entrar
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+
+</html>

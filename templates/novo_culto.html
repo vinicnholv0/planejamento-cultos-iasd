@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novo Culto</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<header class="topo">
+    <h2>Novo Planejamento de Culto</h2>
+</header>
+
+<div class="container">
+
+    <div class="card">
+
+        <h3>Cadastro do Culto</h3>
+
+        <br>
+
+        <label>Data do culto</label><br>
+        <input type="date">
+
+        <br><br>
+
+        <label>Horário</label><br>
+        <input type="time">
+
+        <br><br>
+
+        <label>Tema</label><br>
+        <input type="text" placeholder="Tema do culto">
+
+        <br><br>
+
+        <button>Salvar</button>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

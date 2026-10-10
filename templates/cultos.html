@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block titulo_pagina %}
+Cultos
+{% endblock %}
+
+{% block conteudo %}
+
+<h2>Cultos Planejados</h2>
+
+<a href="/cadastro-culto" class="btn btn-primary mb-3">
+    + Novo Culto
+</a>
+
+<table class="table table-bordered table-hover">
+
+    <thead class="table-dark">
+        <tr>
+            <th>Data</th>
+            <th>Tipo</th>
+            <th>Tema</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+    {% for culto in cultos %}
+
+    <tr>
+
+        <td>{{ culto[1] }}</td>
+
+        <td>{{ culto[2] }}</td>
+
+        <td>{{ culto[3] }}</td>
+
+        <td>
+
+            <a href="/culto/{{ culto[0] }}" class="btn btn-info btn-sm">
+                Ver
+            </a>
+
+            <a href="/editar-culto/{{ culto[0] }}" class="btn btn-warning btn-sm">
+                Editar
+            </a>
+
+            <a href="/excluir-culto/{{ culto[0] }}"
+               class="btn btn-danger btn-sm"
+               onclick="return confirm('Deseja excluir este culto?')">
+                Excluir
+            </a>
+
+        </td>
+
+    </tr>
+
+    {% else %}
+
+    <tr>
+
+        <td colspan="4" class="text-center">
+
+            Nenhum culto cadastrado.
+
+        </td>
+
+    </tr>
+
+    {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% endblock %}

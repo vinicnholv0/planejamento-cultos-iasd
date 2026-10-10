@@ -1,0 +1,469 @@
+/* ===========================================
+   PLANEJAMENTO DE CULTOS IASD
+   Tema Azul Moderno
+=========================================== */
+
+:root{
+
+    --primary:#2563EB;
+    --primary-dark:#1E3A8A;
+    --primary-light:#DBEAFE;
+
+    --background:#F8FAFC;
+    --card:#FFFFFF;
+
+    --text:#1E293B;
+    --text-light:#64748B;
+
+    --border:#E2E8F0;
+
+    --shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    font-family:'Inter',sans-serif;
+    background:var(--background);
+    color:var(--text);
+
+}
+
+/* =========================
+   LAYOUT
+========================= */
+
+.layout{
+
+    display:flex;
+    min-height:100vh;
+
+}
+
+/* =========================
+   MENU LATERAL
+========================= */
+
+.sidebar{
+
+    width:270px;
+
+    background:linear-gradient(
+        180deg,
+        #1E3A8A,
+        #2563EB
+    );
+
+    color:white;
+
+    padding:25px;
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+/* =========================
+   LOGO
+========================= */
+
+.logo{
+
+    text-align:center;
+
+    padding-bottom:30px;
+
+    margin-bottom:30px;
+
+    border-bottom:1px solid rgba(255,255,255,.15);
+
+}
+
+.logo-img{
+
+    width:90px;
+
+    height:auto;
+
+    margin-bottom:15px;
+
+}
+
+.logo h2{
+
+    font-size:21px;
+
+    font-weight:700;
+
+    margin-bottom:5px;
+
+}
+
+.logo span{
+
+    display:block;
+
+    font-size:14px;
+
+    color:#D6E4FF;
+
+}
+
+.logo small{
+
+    display:block;
+
+    margin-top:10px;
+
+    color:rgba(255,255,255,.70);
+
+    font-size:12px;
+
+}
+
+/* =========================
+   MENU
+========================= */
+
+.sidebar nav{
+
+    margin-top:10px;
+
+}
+
+.menu-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:14px 16px;
+
+    margin-bottom:8px;
+
+    border-radius:10px;
+
+    transition:.25s;
+
+    font-weight:500;
+
+}
+
+.menu-item i{
+
+    font-size:18px;
+
+}
+
+.menu-item:hover{
+
+    background:rgba(255,255,255,.12);
+
+    transform:translateX(4px);
+
+}
+
+.menu-item.active{
+
+    background:white;
+
+    color:var(--primary-dark);
+
+    font-weight:600;
+
+}
+
+/* =========================
+   CONTEÚDO
+========================= */
+
+.content{
+
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+/* =========================
+   TOPO
+========================= */
+
+.topbar{
+
+    background:white;
+
+    padding:20px 30px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    box-shadow:0 2px 15px rgba(0,0,0,.05);
+
+}
+
+.topbar h1{
+
+    font-size:28px;
+
+    margin-bottom:4px;
+
+}
+
+.topbar small{
+
+    color:var(--text-light);
+
+}
+
+.user-area{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+}
+
+.usuario{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+.usuario i{
+
+    font-size:36px;
+
+    color:var(--primary);
+
+}
+
+.usuario strong{
+
+    display:block;
+
+}
+
+.usuario small{
+
+    color:var(--text-light);
+
+}
+
+/* =========================
+   ÁREA PRINCIPAL
+========================= */
+
+.page-content{
+
+    padding:30px;
+
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.cards{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+
+    gap:20px;
+
+    margin-bottom:30px;
+
+}
+
+.card{
+
+    background:var(--card);
+
+    border-radius:18px;
+
+    padding:25px;
+
+    box-shadow:var(--shadow);
+
+    border:1px solid var(--border);
+
+    transition:.25s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-6px);
+
+}
+
+.card h3{
+
+    margin-bottom:10px;
+
+    color:var(--primary-dark);
+
+}
+
+.card p{
+
+    color:var(--text-light);
+
+}
+
+/* =========================
+   TABELA
+========================= */
+
+.tabela{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    background:white;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    box-shadow:var(--shadow);
+
+}
+
+.tabela th{
+
+    background:var(--primary-dark);
+
+    color:white;
+
+    padding:16px;
+
+    text-align:left;
+
+}
+
+.tabela td{
+
+    padding:16px;
+
+    border-bottom:1px solid var(--border);
+
+}
+
+.tabela tr:hover{
+
+    background:#F8FAFC;
+
+}
+
+/* =========================
+   FORMULÁRIOS
+========================= */
+
+input,
+select,
+textarea{
+
+    width:100%;
+
+    padding:14px;
+
+    margin-top:8px;
+
+    margin-bottom:20px;
+
+    border:1px solid var(--border);
+
+    border-radius:10px;
+
+    font-size:15px;
+
+    transition:.2s;
+
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+
+    outline:none;
+
+    border-color:var(--primary);
+
+    box-shadow:0 0 0 3px rgba(37,99,235,.15);
+
+}
+
+/* =========================
+   BOTÕES
+========================= */
+
+button{
+
+    background:var(--primary);
+
+    color:white;
+
+    border:none;
+
+    padding:14px 22px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    transition:.2s;
+
+}
+
+button:hover{
+
+    background:#1D4ED8;
+
+}
+
+/* =========================
+   RODAPÉ
+========================= */
+
+.footer{
+
+    margin-top:auto;
+
+    padding:20px;
+
+    text-align:center;
+
+    color:var(--text-light);
+
+    font-size:14px;
+
+}

@@ -1,0 +1,267 @@
+{% extends "base.html" %}
+
+{% block titulo_pagina %}
+Detalhes do Evento
+{% endblock %}
+
+{% block conteudo %}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+    <div>
+
+        <h2>
+            <i class="bi bi-calendar-event"></i>
+            {{ evento[1] }}
+        </h2>
+
+        <p class="text-muted mb-0">
+            Detalhes e planejamento do evento
+        </p>
+
+    </div>
+
+    <a
+        href="/eventos"
+        class="btn btn-secondary">
+
+        <i class="bi bi-arrow-left"></i>
+        Voltar
+
+    </a>
+
+</div>
+
+
+<div class="card mb-4 shadow-sm">
+
+    <div class="card-header">
+
+        <strong>
+
+            <i class="bi bi-calendar-event"></i>
+
+            Informações do Evento
+
+        </strong>
+
+    </div>
+
+
+    <div class="card-body">
+
+        <div class="row">
+
+
+            <!-- NOME -->
+
+            <div class="col-md-6 mb-3">
+
+                <strong>Nome</strong>
+
+                <div>
+                    {{ evento[1] }}
+                </div>
+
+            </div>
+
+
+            <!-- TIPO -->
+
+            <div class="col-md-6 mb-3">
+
+                <strong>Tipo</strong>
+
+                <div>
+                    {{ evento[2] }}
+                </div>
+
+            </div>
+
+
+            <!-- DATA INICIAL -->
+
+            <div class="col-md-3 mb-3">
+
+                <strong>Data inicial</strong>
+
+                <div>
+                    {{ evento[3] }}
+                </div>
+
+            </div>
+
+
+            <!-- HORA INICIAL -->
+
+            <div class="col-md-3 mb-3">
+
+                <strong>Hora inicial</strong>
+
+                <div>
+                    {{ evento[4] }}
+                </div>
+
+            </div>
+
+
+            <!-- DATA FINAL -->
+
+            <div class="col-md-3 mb-3">
+
+                <strong>Data final</strong>
+
+                <div>
+                    {{ evento[5] or "-" }}
+                </div>
+
+            </div>
+
+
+            <!-- HORA FINAL -->
+
+            <div class="col-md-3 mb-3">
+
+                <strong>Hora final</strong>
+
+                <div>
+                    {{ evento[6] or "-" }}
+                </div>
+
+            </div>
+
+
+            <!-- LOCAL -->
+
+            <div class="col-md-6 mb-3">
+
+                <strong>Local</strong>
+
+                <div>
+                    {{ evento[7] or "-" }}
+                </div>
+
+            </div>
+
+
+            <!-- RESPONSÁVEL -->
+
+            <div class="col-md-6 mb-3">
+
+                <strong>Responsável</strong>
+
+                <div>
+                    {{ evento[8] or "-" }}
+                </div>
+
+            </div>
+
+
+            <!-- STATUS -->
+
+            <div class="col-12 mb-3">
+
+                <strong>Status</strong>
+
+                <form
+                    method="POST"
+                    action="/alterar-status-evento/{{ evento[0] }}"
+                    class="mt-2">
+
+                    <div class="d-flex flex-wrap gap-2">
+
+                        <select
+                            name="status"
+                            class="form-select"
+                            style="max-width: 220px;">
+
+                            <option
+                                value="Planejado"
+                                {% if evento[11] == "Planejado" %}selected{% endif %}>
+                                Planejado
+                            </option>
+
+                            <option
+                                value="Realizado"
+                                {% if evento[11] == "Realizado" %}selected{% endif %}>
+                                Realizado
+                            </option>
+
+                            <option
+                                value="Cancelado"
+                                {% if evento[11] == "Cancelado" %}selected{% endif %}>
+                                Cancelado
+                            </option>
+
+                        </select>
+
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary">
+
+                            <i class="bi bi-check-circle"></i>
+
+                            Atualizar Status
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+        <hr>
+
+
+        <!-- DESCRIÇÃO -->
+
+        <div>
+
+            <strong>Descrição</strong>
+
+            <p class="mt-2">
+
+                {{ evento[9] or "Nenhuma descrição cadastrada." }}
+
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- BOTÕES -->
+
+<div class="d-flex flex-wrap gap-2">
+
+    <a
+        href="/editar-evento/{{ evento[0] }}"
+        class="btn btn-warning">
+
+        <i class="bi bi-pencil"></i>
+
+        Editar Evento
+
+    </a>
+
+
+    <a
+        href="/programacao-evento/{{ evento[0] }}"
+        class="btn btn-primary">
+
+        <i class="bi bi-list-check"></i>
+
+        Montar Programação
+
+    </a>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,11 @@
+*.log
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+*.db
+*.sqlite
+*.sqlite3
+*.log
+.DS_Store

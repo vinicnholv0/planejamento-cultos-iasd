@@ -1,0 +1,281 @@
+{% extends "base.html" %}
+
+{% block titulo_pagina %}
+Novo Evento
+{% endblock %}
+
+{% block conteudo %}
+
+<h2>Novo Evento</h2>
+
+<p class="text-muted">
+    Cadastre as informações básicas do evento.
+</p>
+
+<form method="POST">
+
+```
+<div class="row">
+
+    <div class="col-md-6 mb-3">
+
+        <label class="form-label">
+            Nome do Evento
+        </label>
+
+        <input
+            type="text"
+            name="nome"
+            class="form-control"
+            placeholder="Ex.: Culto Jovem Especial"
+            required>
+
+    </div>
+
+
+    <div class="col-md-6 mb-3">
+
+        <label class="form-label">
+            Tipo do Evento
+        </label>
+
+        <select
+            class="form-control"
+            name="tipo"
+            id="tipoEvento"
+            onchange="mostrarOutro()"
+            required>
+
+            <option value="">
+                Selecione...
+            </option>
+
+            <option value="Culto Divino">
+                Culto Divino
+            </option>
+
+            <option value="Culto Jovem">
+                Culto Jovem
+            </option>
+
+            <option value="Semana Santa">
+                Semana Santa
+            </option>
+
+            <option value="Batismo">
+                Batismo
+            </option>
+
+            <option value="Santa Ceia">
+                Santa Ceia
+            </option>
+
+            <option value="Congresso">
+                Congresso
+            </option>
+
+            <option value="Evangelismo">
+                Evangelismo
+            </option>
+
+            <option value="Vigília">
+                Vigília
+            </option>
+
+            <option value="Outro">
+                Outro...
+            </option>
+
+        </select>
+
+    </div>
+
+</div>
+
+
+<div
+    class="mb-3"
+    id="campoOutro"
+    style="display:none;">
+
+    <label class="form-label">
+        Digite o tipo do evento
+    </label>
+
+    <input
+        type="text"
+        name="tipo_personalizado"
+        id="tipoPersonalizado"
+        class="form-control"
+        placeholder="Ex.: Encontro de Jovens">
+
+</div>
+
+
+<div class="row">
+
+    <div class="col-md-3 mb-3">
+
+        <label class="form-label">
+            Data Inicial
+        </label>
+
+        <input
+            type="date"
+            name="data_inicio"
+            class="form-control"
+            required>
+
+    </div>
+
+
+    <div class="col-md-3 mb-3">
+
+        <label class="form-label">
+            Hora Inicial
+        </label>
+
+        <input
+            type="time"
+            name="hora_inicio"
+            class="form-control"
+            required>
+
+    </div>
+
+
+    <div class="col-md-3 mb-3">
+
+        <label class="form-label">
+            Data Final
+        </label>
+
+        <input
+            type="date"
+            name="data_fim"
+            class="form-control">
+
+    </div>
+
+
+    <div class="col-md-3 mb-3">
+
+        <label class="form-label">
+            Hora Final
+        </label>
+
+        <input
+            type="time"
+            name="hora_fim"
+            class="form-control">
+
+    </div>
+
+</div>
+
+
+<div class="mb-3">
+
+    <label class="form-label">
+        Local
+    </label>
+
+    <input
+        type="text"
+        name="local"
+        class="form-control"
+        placeholder="Ex.: Igreja IASD Vale das Mangueiras">
+
+</div>
+
+
+<div class="mb-3">
+
+    <label class="form-label">
+        Responsável
+    </label>
+
+    <input
+        type="text"
+        name="responsavel"
+        class="form-control"
+        placeholder="Nome do responsável">
+
+</div>
+
+
+<div class="mb-3">
+
+    <label class="form-label">
+        Descrição
+    </label>
+
+    <textarea
+        name="descricao"
+        rows="4"
+        class="form-control"
+        placeholder="Informações adicionais sobre o evento..."></textarea>
+
+</div>
+
+
+<div class="d-flex gap-2">
+
+    <button
+        class="btn btn-primary"
+        type="submit">
+
+        <i class="bi bi-arrow-right-circle"></i>
+        Avançar
+
+    </button>
+
+
+    <a
+        href="/eventos"
+        class="btn btn-secondary">
+
+        Cancelar
+
+    </a>
+
+</div>
+```
+
+</form>
+
+<script>
+
+function mostrarOutro() {
+
+    const tipo =
+        document.getElementById("tipoEvento").value;
+
+    const campo =
+        document.getElementById("campoOutro");
+
+    const personalizado =
+        document.getElementById("tipoPersonalizado");
+
+
+    if (tipo === "Outro") {
+
+        campo.style.display = "block";
+
+        personalizado.required = true;
+
+    } else {
+
+        campo.style.display = "none";
+
+        personalizado.required = false;
+
+        personalizado.value = "";
+
+    }
+
+}
+
+</script>
+
+{% endblock %}

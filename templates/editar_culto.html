@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+
+{% block titulo_pagina %}
+Editar Culto
+{% endblock %}
+
+
+{% block conteudo %}
+
+<h2>Editar Culto</h2>
+
+
+<form method="POST">
+
+
+<div class="mb-3">
+<label class="form-label">
+Data do Culto
+</label>
+
+<input 
+type="date"
+name="data"
+class="form-control"
+value="{{ culto[1] }}"
+required>
+
+</div>
+
+
+
+<div class="mb-3">
+
+<label class="form-label">
+Tipo de Culto
+</label>
+
+<select name="tipo" class="form-control">
+
+<option {% if culto[2] == "Sábado" %}selected{% endif %}>
+Sábado
+</option>
+
+<option {% if culto[2] == "Domingo" %}selected{% endif %}>
+Domingo
+</option>
+
+<option {% if culto[2] == "Culto Jovem" %}selected{% endif %}>
+Culto Jovem
+</option>
+
+<option {% if culto[2] == "Outro" %}selected{% endif %}>
+Outro
+</option>
+
+</select>
+
+</div>
+
+
+
+<div class="mb-3">
+
+<label class="form-label">
+Tema do Culto
+</label>
+
+<input 
+type="text"
+name="tema"
+class="form-control"
+value="{{ culto[3] }}">
+
+</div>
+
+
+
+<hr>
+
+
+<h4>
+Informações Administrativas
+</h4>
+
+
+<div class="mb-3">
+
+<label class="form-label">
+Hino Inicial
+</label>
+
+<input 
+type="text"
+name="hino_inicial"
+class="form-control"
+value="{{ culto[4] }}">
+
+</div>
+
+
+
+<div class="mb-3">
+
+<label class="form-label">
+Hino Final
+</label>
+
+<input 
+type="text"
+name="hino_final"
+class="form-control"
+value="{{ culto[5] }}">
+
+</div>
+
+
+
+<div class="mb-3">
+
+<label class="form-label">
+Observações
+</label>
+
+<textarea
+name="observacoes"
+class="form-control"
+rows="4">{{ culto[6] }}</textarea>
+
+</div>
+
+
+
+<button 
+class="btn btn-success"
+type="submit">
+
+Salvar Alterações
+
+</button>
+
+
+<a href="/cultos" class="btn btn-secondary">
+
+Cancelar
+
+</a>
+
+
+</form>
+
+
+{% endblock %}

@@ -1,0 +1,450 @@
+{% extends "base.html" %}
+
+{% block titulo_pagina %}
+Editar Dia da Escala
+{% endblock %}
+
+{% block conteudo %}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+    <div>
+
+        <h2>
+            Editar Dia
+        </h2>
+
+        <p class="text-muted mb-0">
+            Escala {{ escala[1] }}/{{ escala[2] }}
+        </p>
+
+    </div>
+
+
+    <a
+        href="/escala-mensal/{{ escala[0] }}"
+        class="btn btn-secondary">
+
+        <i class="bi bi-arrow-left"></i>
+        Voltar
+
+    </a>
+
+</div>
+
+
+<div class="card">
+
+    <div class="card-header">
+
+        <strong>
+
+            <i class="bi bi-pencil"></i>
+
+            Editar programação
+
+        </strong>
+
+    </div>
+
+
+    <div class="card-body">
+
+        <form
+            method="POST"
+            action="/editar-dia-escala/{{ dia[0] }}">
+
+
+            <!-- DATA -->
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Data do culto
+                </label>
+
+                <input
+                    type="date"
+                    name="data"
+                    id="data"
+                    class="form-control"
+                    value="{{ dia[2] }}"
+                    required>
+
+                <small
+                    id="dia-semana"
+                    class="text-muted">
+                </small>
+
+            </div>
+
+
+            <!-- TIPO -->
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Tipo de culto
+                </label>
+
+                <select
+                    name="tipo_culto"
+                    class="form-control"
+                    required>
+
+                    <option value="">
+                        Selecione
+                    </option>
+
+                    <option value="Culto"
+                        {% if dia[3] == "Culto" %}selected{% endif %}>
+                        Culto
+                    </option>
+
+                    <option value="Escola Sabatina"
+                        {% if dia[3] == "Escola Sabatina" %}selected{% endif %}>
+                        Escola Sabatina
+                    </option>
+
+                    <option value="Culto e Escola Sabatina"
+                        {% if dia[3] == "Culto e Escola Sabatina" %}selected{% endif %}>
+                        Culto e Escola Sabatina
+                    </option>
+
+                    <option value="Culto Jovem"
+                        {% if dia[3] == "Culto Jovem" %}selected{% endif %}>
+                        Culto Jovem
+                    </option>
+
+                    <option value="Outro"
+                        {% if dia[3] == "Outro" %}selected{% endif %}>
+                        Outro
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <hr>
+
+
+            <!-- CANTO -->
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    🎵 Canto
+                </label>
+
+                <select
+                    name="canto"
+                    class="form-control">
+
+                    <option value="">
+                        Selecione o cantor
+                    </option>
+
+                    {% for participante in participantes %}
+
+                    <option
+                        value="{{ participante[0] }}"
+                        {% if dia[4] == participante[0] %}selected{% endif %}>
+
+                        {{ participante[1] }}
+
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+
+            <!-- PREGADOR -->
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    🎙️ Pregador
+                </label>
+
+                <select
+                    name="pregador"
+                    class="form-control">
+
+                    <option value="">
+                        Selecione o pregador
+                    </option>
+
+                    {% for participante in participantes %}
+
+                    <option
+                        value="{{ participante[0] }}"
+                        {% if dia[5] == participante[0] %}selected{% endif %}>
+
+                        {{ participante[1] }}
+
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+
+            <!-- FUNÇÕES DE SÁBADO -->
+
+            <div
+                id="funcoes-sabado"
+                style="display:none;">
+
+                <hr>
+
+                <div class="alert alert-info">
+
+                    <i class="bi bi-info-circle"></i>
+
+                    Este é um <strong>sábado</strong>.
+
+                </div>
+
+
+                <!-- OFERTA -->
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        💰 Colher Oferta
+                    </label>
+
+                    <select
+                        name="colher_oferta"
+                        id="colher_oferta"
+                        class="form-control">
+
+                        <option value="">
+                            Selecione
+                        </option>
+
+                        {% for participante in participantes %}
+
+                        <option
+                            value="{{ participante[0] }}"
+                            {% if dia[6] == participante[0] %}selected{% endif %}>
+
+                            {{ participante[1] }}
+
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <!-- PROFESSOR -->
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        📖 Professor da Escola Sabatina
+                    </label>
+
+                    <select
+                        name="professor_es"
+                        id="professor_es"
+                        class="form-control">
+
+                        <option value="">
+                            Selecione
+                        </option>
+
+                        {% for participante in participantes %}
+
+                        <option
+                            value="{{ participante[0] }}"
+                            {% if dia[7] == participante[0] %}selected{% endif %}>
+
+                            {{ participante[1] }}
+
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <!-- DIRETOR -->
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        📚 Diretor da Escola Sabatina
+                    </label>
+
+                    <select
+                        name="diretor_es"
+                        id="diretor_es"
+                        class="form-control">
+
+                        <option value="">
+                            Selecione
+                        </option>
+
+                        {% for participante in participantes %}
+
+                        <option
+                            value="{{ participante[0] }}"
+                            {% if dia[8] == participante[0] %}selected{% endif %}>
+
+                            {{ participante[1] }}
+
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <!-- OBSERVAÇÕES -->
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Observações
+                </label>
+
+                <textarea
+                    name="observacoes"
+                    class="form-control"
+                    rows="3">{{ dia[9] or "" }}</textarea>
+
+            </div>
+
+
+            <div class="d-flex gap-2">
+
+                <a
+                    href="/escala-mensal/{{ escala[0] }}"
+                    class="btn btn-secondary">
+
+                    Cancelar
+
+                </a>
+
+
+                <button
+                    type="submit"
+                    class="btn btn-primary">
+
+                    <i class="bi bi-check-circle"></i>
+
+                    Salvar alterações
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const campoData =
+    document.getElementById("data");
+
+const funcoesSabado =
+    document.getElementById("funcoes-sabado");
+
+const diaSemana =
+    document.getElementById("dia-semana");
+
+
+function verificarDia() {
+
+    if (!campoData.value) {
+
+        funcoesSabado.style.display = "none";
+
+        diaSemana.textContent = "";
+
+        return;
+
+    }
+
+
+    const data =
+        new Date(campoData.value + "T00:00:00");
+
+    const dia =
+        data.getDay();
+
+
+    const nomesDias = [
+
+        "Domingo",
+        "Segunda-feira",
+        "Terça-feira",
+        "Quarta-feira",
+        "Quinta-feira",
+        "Sexta-feira",
+        "Sábado"
+
+    ];
+
+
+    diaSemana.textContent =
+        "Dia da semana: " + nomesDias[dia];
+
+
+    if (dia === 6) {
+
+        funcoesSabado.style.display = "block";
+
+    } else {
+
+        funcoesSabado.style.display = "none";
+
+        document.getElementById(
+            "colher_oferta"
+        ).value = "";
+
+        document.getElementById(
+            "professor_es"
+        ).value = "";
+
+        document.getElementById(
+            "diretor_es"
+        ).value = "";
+
+    }
+
+}
+
+
+campoData.addEventListener(
+    "change",
+    verificarDia
+);
+
+
+// Executa ao abrir a página
+verificarDia();
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,463 @@
+{% extends "base.html" %}
+
+{% block titulo_pagina %}
+Nova Escala
+{% endblock %}
+
+{% block conteudo %}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+    <div>
+
+        <h2>
+            Nova Escala
+        </h2>
+
+        <p class="text-muted mb-0">
+            Monte a escala do culto.
+        </p>
+
+    </div>
+
+    <a
+        href="/escalas"
+        class="btn btn-secondary">
+
+        <i class="bi bi-arrow-left"></i>
+
+        Voltar
+
+    </a>
+
+</div>
+
+
+<div class="card">
+
+    <div class="card-header">
+
+        <strong>
+
+            <i class="bi bi-calendar-plus"></i>
+
+            Informações da Escala
+
+        </strong>
+
+    </div>
+
+
+    <div class="card-body">
+
+        <form
+            method="POST"
+            action="/nova-escala">
+
+
+            <div class="row">
+
+
+                <div class="col-md-4 mb-3">
+
+                    <label class="form-label">
+                        Data
+                    </label>
+
+                    <input
+                        type="date"
+                        name="data"
+                        class="form-control"
+                        required>
+
+                </div>
+
+
+                <div class="col-md-4 mb-3">
+
+                    <label class="form-label">
+                        Horário
+                    </label>
+
+                    <input
+                        type="time"
+                        name="horario"
+                        class="form-control"
+                        required>
+
+                </div>
+
+
+                <div class="col-md-4 mb-3">
+
+                    <label class="form-label">
+                        Evento / Culto
+                    </label>
+
+                    <input
+                        type="text"
+                        name="evento"
+                        class="form-control"
+                        placeholder="Ex.: Culto Divino"
+                        required>
+
+                </div>
+
+            </div>
+
+
+            <hr>
+
+
+            <h5 class="mb-3">
+
+                <i class="bi bi-people"></i>
+
+                Participantes
+
+            </h5>
+
+
+            <div class="row">
+
+
+                <!-- PREGADOR -->
+
+                <div class="col-md-4 mb-3">
+
+                    <label class="form-label">
+                        Pregador
+                    </label>
+
+                    <select
+                        name="pregador"
+                        class="form-control">
+
+                        <option value="">
+                            Selecione
+                        </option>
+
+                        {% for participante in participantes %}
+
+                        <option value="{{ participante[0] }}">
+                            {{ participante[1] }}
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <!-- CANTOR -->
+
+                <div class="col-md-4 mb-3">
+
+                    <label class="form-label">
+                        Cantor
+                    </label>
+
+                    <select
+                        name="cantor"
+                        class="form-control">
+
+                        <option value="">
+                            Selecione
+                        </option>
+
+                        {% for participante in participantes %}
+
+                        <option value="{{ participante[0] }}">
+                            {{ participante[1] }}
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <!-- DIRETOR -->
+
+                <div class="col-md-4 mb-3">
+
+                    <label class="form-label">
+                        Diretor
+                    </label>
+
+                    <select
+                        name="diretor"
+                        class="form-control">
+
+                        <option value="">
+                            Selecione
+                        </option>
+
+                        {% for participante in participantes %}
+
+                        <option value="{{ participante[0] }}">
+                            {{ participante[1] }}
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <!-- ANCIÃO -->
+
+                <div class="col-md-4 mb-3">
+
+                    <label class="form-label">
+                        Ancião
+                    </label>
+
+                    <select
+                        name="anciao"
+                        class="form-control">
+
+                        <option value="">
+                            Selecione
+                        </option>
+
+                        {% for participante in participantes %}
+
+                        <option value="{{ participante[0] }}">
+                            {{ participante[1] }}
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <!-- DIÁCONO -->
+
+                <div class="col-md-4 mb-3">
+
+                    <label class="form-label">
+                        Diácono
+                    </label>
+
+                    <select
+                        name="diacono"
+                        class="form-control">
+
+                        <option value="">
+                            Selecione
+                        </option>
+
+                        {% for participante in participantes %}
+
+                        <option value="{{ participante[0] }}">
+                            {{ participante[1] }}
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <!-- DIACONISA -->
+
+                <div class="col-md-4 mb-3">
+
+                    <label class="form-label">
+                        Diaconisa
+                    </label>
+
+                    <select
+                        name="diaconisa"
+                        class="form-control">
+
+                        <option value="">
+                            Selecione
+                        </option>
+
+                        {% for participante in participantes %}
+
+                        <option value="{{ participante[0] }}">
+                            {{ participante[1] }}
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <!-- RECEPÇÃO -->
+
+                <div class="col-md-4 mb-3">
+
+                    <label class="form-label">
+                        Recepção
+                    </label>
+
+                    <select
+                        name="recepcao"
+                        class="form-control">
+
+                        <option value="">
+                            Selecione
+                        </option>
+
+                        {% for participante in participantes %}
+
+                        <option value="{{ participante[0] }}">
+                            {{ participante[1] }}
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <!-- SONOPLASTIA -->
+
+                <div class="col-md-4 mb-3">
+
+                    <label class="form-label">
+                        Sonoplastia
+                    </label>
+
+                    <select
+                        name="sonoplastia"
+                        class="form-control">
+
+                        <option value="">
+                            Selecione
+                        </option>
+
+                        {% for participante in participantes %}
+
+                        <option value="{{ participante[0] }}">
+                            {{ participante[1] }}
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <!-- MÍDIA -->
+
+                <div class="col-md-4 mb-3">
+
+                    <label class="form-label">
+                        Mídia
+                    </label>
+
+                    <select
+                        name="midia"
+                        class="form-control">
+
+                        <option value="">
+                            Selecione
+                        </option>
+
+                        {% for participante in participantes %}
+
+                        <option value="{{ participante[0] }}">
+                            {{ participante[1] }}
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <!-- INFANTIL -->
+
+                <div class="col-md-4 mb-3">
+
+                    <label class="form-label">
+                        Ministério Infantil
+                    </label>
+
+                    <select
+                        name="infantil"
+                        class="form-control">
+
+                        <option value="">
+                            Selecione
+                        </option>
+
+                        {% for participante in participantes %}
+
+                        <option value="{{ participante[0] }}">
+                            {{ participante[1] }}
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <hr>
+
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Observações
+                </label>
+
+                <textarea
+                    name="observacoes"
+                    class="form-control"
+                    rows="4"
+                    placeholder="Observações da escala..."></textarea>
+
+            </div>
+
+
+            <div class="d-flex gap-2">
+
+                <a
+                    href="/escalas"
+                    class="btn btn-secondary">
+
+                    Cancelar
+
+                </a>
+
+
+                <button
+                    type="submit"
+                    class="btn btn-primary">
+
+                    <i class="bi bi-check-circle"></i>
+
+                    Salvar Escala
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

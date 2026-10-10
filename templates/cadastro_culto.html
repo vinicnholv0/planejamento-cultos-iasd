@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% block titulo_pagina %}
+Cadastro de Culto
+{% endblock %}
+
+{% block conteudo %}
+
+<h2>Novo Culto</h2>
+
+<form method="POST">
+
+    <div class="mb-3">
+        <label class="form-label">Data do Culto</label>
+        <input type="date" name="data" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Tipo de Culto</label>
+
+        <select name="tipo" class="form-select">
+
+            <option>Sábado</option>
+            <option>Domingo</option>
+            <option>Culto Jovem</option>
+            <option>Semana Santa</option>
+            <option>Santa Ceia</option>
+            <option>Evangelismo</option>
+            <option>Outro</option>
+
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Tema</label>
+        <input type="text" name="tema" class="form-control">
+    </div>
+
+    <hr>
+
+    <h4>Participações</h4>
+
+    <div class="mb-3">
+        <label class="form-label">Pregador</label>
+
+        <select name="pregador" class="form-select">
+
+            <option value="">Selecione...</option>
+
+            {% for participante in participantes %}
+
+            <option value="{{ participante[0] }}">
+                {{ participante[1] }}
+            </option>
+
+            {% endfor %}
+
+        </select>
+
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Ancião</label>
+
+        <select name="anciao" class="form-select">
+
+            <option value="">Selecione...</option>
+
+            {% for participante in participantes %}
+
+            <option value="{{ participante[0] }}">
+                {{ participante[1] }}
+            </option>
+
+            {% endfor %}
+
+        </select>
+
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Diretor do Culto</label>
+
+        <select name="diretor" class="form-select">
+
+            <option value="">Selecione...</option>
+
+            {% for participante in participantes %}
+
+            <option value="{{ participante[0] }}">
+                {{ participante[1] }}
+            </option>
+
+            {% endfor %}
+
+        </select>
+
+    </div>
+
+    <hr>
+
+    <h4>Informações Administrativas</h4>
+
+    <div class="mb-3">
+        <label class="form-label">Hino Inicial</label>
+        <input type="text" name="hino_inicial" class="form-control" placeholder="Número ou nome do hino">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Hino Final</label>
+        <input type="text" name="hino_final" class="form-control" placeholder="Número ou nome do hino">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Observações</label>
+        <textarea name="observacoes" rows="4" class="form-control"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-success">
+        Salvar Culto
+    </button>
+
+    <a href="/cultos" class="btn btn-secondary">
+        Cancelar
+    </a>
+
+</form>
+
+{% endblock %}

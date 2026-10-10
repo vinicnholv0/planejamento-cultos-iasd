@@ -1,0 +1,426 @@
+{% extends "base.html" %}
+
+{% block titulo_pagina %}
+Programação do Evento
+{% endblock %}
+
+{% block conteudo %}
+
+<!-- CABEÇALHO -->
+
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+
+    <div>
+
+        <h2 class="mb-1">
+            <i class="bi bi-calendar-event"></i>
+            {{ evento[1] }}
+        </h2>
+
+        <p class="text-muted mb-0">
+
+            {{ evento[3] }}
+            •
+            {{ evento[4] }}
+
+        </p>
+
+    </div>
+
+
+    <div class="d-flex flex-wrap gap-2">
+
+        <a
+            href="/evento/{{ evento[0] }}"
+            class="btn btn-secondary">
+
+            <i class="bi bi-arrow-left"></i>
+            Voltar
+
+        </a>
+
+
+        <a
+            href="/visualizar-programacao-evento/{{ evento[0] }}"
+            class="btn btn-primary">
+
+            <i class="bi bi-eye"></i>
+            Ver Programação
+
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- PROGRAMAÇÃO -->
+
+<div class="card mb-4 shadow-sm">
+
+    <div class="card-header">
+
+        <strong>
+
+            <i class="bi bi-list-check"></i>
+
+            Programação
+
+        </strong>
+
+    </div>
+
+
+    <div class="card-body">
+
+        {% if itens %}
+
+        <div class="table-responsive">
+
+            <table
+                class="table table-bordered align-middle mb-0"
+                style="min-width: 850px;">
+
+                <thead class="table-light">
+
+                    <tr>
+
+                        <th style="width: 80px;" class="text-center">
+                            Ordem
+                        </th>
+
+                        <th style="width: 120px;">
+                            Horário
+                        </th>
+
+                        <th>
+                            Função
+                        </th>
+
+                        <th>
+                            Participante
+                        </th>
+
+                        <th>
+                            Observação
+                        </th>
+
+                        <th style="width: 190px;" class="text-center">
+                            Ações
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for item in itens %}
+
+                    <tr>
+
+                        <!-- ORDEM -->
+
+                        <td class="text-center">
+
+                            <strong>
+                                {{ item[1] }}
+                            </strong>
+
+                        </td>
+
+
+                        <!-- HORÁRIO -->
+
+                        <td class="text-nowrap">
+
+                            <strong>
+                                {{ item[2] or "--:--" }}
+                            </strong>
+
+                        </td>
+
+
+                        <!-- FUNÇÃO -->
+
+                        <td>
+
+                            {{ item[3] or "-" }}
+
+                        </td>
+
+
+                        <!-- PARTICIPANTE -->
+
+                        <td>
+
+                            {{ item[4] or "-" }}
+
+                        </td>
+
+
+                        <!-- OBSERVAÇÃO -->
+
+                        <td>
+
+                            {{ item[5] or "-" }}
+
+                        </td>
+
+
+                        <!-- AÇÕES -->
+
+                        <td>
+
+                            <div class="d-flex flex-wrap justify-content-center gap-1">
+
+                                <!-- SUBIR -->
+
+                                <a
+                                    href="/subir-item-evento/{{ item[0] }}"
+                                    class="btn btn-secondary btn-sm"
+                                    title="Subir item"
+                                    aria-label="Subir item"
+                                    style="min-width: 42px; min-height: 38px;">
+
+                                    <i class="bi bi-arrow-up"></i>
+
+                                </a>
+
+
+                                <!-- DESCER -->
+
+                                <a
+                                    href="/descer-item-evento/{{ item[0] }}"
+                                    class="btn btn-secondary btn-sm"
+                                    title="Descer item"
+                                    aria-label="Descer item"
+                                    style="min-width: 42px; min-height: 38px;">
+
+                                    <i class="bi bi-arrow-down"></i>
+
+                                </a>
+
+
+                                <!-- EDITAR -->
+
+                                <a
+                                    href="/editar-item-evento/{{ item[0] }}"
+                                    class="btn btn-warning btn-sm"
+                                    title="Editar item"
+                                    aria-label="Editar item"
+                                    style="min-width: 42px; min-height: 38px;">
+
+                                    <i class="bi bi-pencil"></i>
+
+                                </a>
+
+
+                                <!-- EXCLUIR -->
+
+                                <a
+                                    href="/excluir-item-evento/{{ item[0] }}"
+                                    class="btn btn-danger btn-sm"
+                                    title="Excluir item"
+                                    aria-label="Excluir item"
+                                    style="min-width: 42px; min-height: 38px;"
+
+                                    onclick="return confirm('Deseja excluir este item?')">
+
+                                    <i class="bi bi-trash"></i>
+
+                                </a>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <div class="mt-2 text-muted small d-md-none">
+
+            <i class="bi bi-arrow-left-right"></i>
+
+            Deslize a tabela para os lados para visualizar todas as informações.
+
+        </div>
+
+
+        {% else %}
+
+        <div class="text-center py-5">
+
+            <i
+                class="bi bi-calendar2-x"
+                style="font-size: 45px;">
+            </i>
+
+            <h5 class="mt-3">
+                Nenhum item cadastrado
+            </h5>
+
+            <p class="text-muted">
+                Comece adicionando o primeiro item da programação.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+
+<!-- ADICIONAR ITEM -->
+
+<div class="card shadow-sm">
+
+    <div class="card-header">
+
+        <strong>
+
+            <i class="bi bi-plus-circle"></i>
+
+            Adicionar item
+
+        </strong>
+
+    </div>
+
+
+    <div class="card-body">
+
+        <form
+            method="POST"
+            action="/adicionar-item-evento/{{ evento[0] }}">
+
+            <div class="row">
+
+
+                <!-- HORÁRIO -->
+
+                <div class="col-12 col-md-2 mb-3">
+
+                    <label class="form-label">
+                        Horário
+                    </label>
+
+                    <input
+                        type="time"
+                        name="horario"
+                        class="form-control">
+
+                </div>
+
+
+                <!-- FUNÇÃO -->
+
+                <div class="col-12 col-md-3 mb-3">
+
+                    <label class="form-label">
+                        Função
+                    </label>
+
+                    <select
+                        name="funcao"
+                        id="funcao"
+                        class="form-control"
+                        required>
+
+                        <option value="">
+                            Selecione a função
+                        </option>
+
+                        {% for funcao in funcoes %}
+
+                        <option value="{{ funcao[1] }}">
+
+                            {{ funcao[1] }}
+
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <!-- PARTICIPANTE -->
+
+                <div class="col-12 col-md-3 mb-3">
+
+                    <label class="form-label">
+                        Participante
+                    </label>
+
+                    <select
+                        name="participante"
+                        class="form-control">
+
+                        <option value="">
+                            Selecione
+                        </option>
+
+                        {% for participante in participantes %}
+
+                        <option value="{{ participante[0] }}">
+
+                            {{ participante[1] }}
+
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <!-- OBSERVAÇÃO -->
+
+                <div class="col-12 col-md-4 mb-3">
+
+                    <label class="form-label">
+                        Observação
+                    </label>
+
+                    <input
+                        type="text"
+                        name="observacao"
+                        class="form-control"
+                        placeholder="Opcional">
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="btn btn-primary w-100 w-md-auto">
+
+                <i class="bi bi-plus-circle"></i>
+
+                Adicionar item
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+Dashboard
+{% endblock %}
+
+{% block conteudo %}
+
+<h2>Dashboard</h2>
+
+<div class="cards">
+
+    <div class="card">
+        <h3>📅 Cultos</h3>
+        <p>{{ cultos|length }} cadastrados</p>
+    </div>
+
+    <div class="card">
+        <h3>👥 Participantes</h3>
+        <p>0 cadastrados</p>
+    </div>
+
+    <div class="card">
+        <h3>🎵 Hinos</h3>
+        <p>0 cadastrados</p>
+    </div>
+
+    <div class="card">
+        <h3>📊 Relatórios</h3>
+        <p>Visualizar</p>
+    </div>
+
+</div>
+
+<h2 style="margin-top:40px;">
+Próximos Cultos
+</h2>
+
+<table class="table table-bordered">
+
+    <tr>
+        <th>Data</th>
+        <th>Tipo</th>
+        <th>Tema</th>
+        <th>Status</th>
+        <th>Ações</th>
+    </tr>
+
+    {% for culto in cultos %}
+
+    <tr>
+
+        <td>{{ culto[1] }}</td>
+        <td>{{ culto[2] }}</td>
+        <td>{{ culto[3] }}</td>
+        <td>Planejado</td>
+
+        <td>
+
+            <a href="/culto/{{ culto[0] }}" class="btn btn-primary btn-sm">
+                Ver
+            </a>
+
+        </td>
+
+    </tr>
+
+    {% else %}
+
+    <tr>
+
+        <td colspan="5" class="text-center">
+            Nenhum culto cadastrado.
+        </td>
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endblock %}
