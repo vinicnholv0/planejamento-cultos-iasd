@@ -389,6 +389,77 @@ def cadastro_participante():
         "cadastro_participante.html",
         funcoes=funcoes
     )
+
+
+# ==========================
+# EDITAR PARTICIPANTE
+# ==========================
+
+@app.route("/editar-participante/<int:id>", methods=["GET", "POST"])
+@login_obrigatorio
+def editar_participante(id):
+    banco = conectar_banco()
+    cursor = banco.cursor()
+
+    cursor.execute(
+        "SELECT * FROM participantes WHERE id = ?",
+        (id,)
+    )
+    participante = cursor.fetchone()
+
+    if participante is None:
+        banco.close()
+        return "Participante não encontrado.", 404
+
+    if request.method == "POST":
+        nome = request.form["nome"]
+        telefone = request.form.get("telefone", "")
+        email = request.form.get("email", "")
+        observacoes = request.form.get("observacoes", "")
+        funcoes = request.form.getlist("funcoes")
+
+        cursor.execute("""
+            UPDATE participantes
+            SET nome = ?, telefone = ?, email = ?, observacoes = ?
+            WHERE id = ?
+        """, (nome, telefone, email, observacoes, id))
+
+        cursor.execute("""
+            DELETE FROM participante_funcoes
+            WHERE participante_id = ?
+        """, (id,))
+
+        for funcao_id in funcoes:
+            cursor.execute("""
+                INSERT INTO participante_funcoes
+                (participante_id, funcao_id)
+                VALUES (?, ?)
+            """, (id, funcao_id))
+
+        banco.commit()
+        banco.close()
+        return redirect("/participantes")
+
+    cursor.execute("SELECT * FROM funcoes ORDER BY nome")
+    funcoes = cursor.fetchall()
+
+    cursor.execute("""
+        SELECT funcao_id
+        FROM participante_funcoes
+        WHERE participante_id = ?
+    """, (id,))
+    funcoes_selecionadas = [str(linha[0]) for linha in cursor.fetchall()]
+
+    banco.close()
+
+    return render_template(
+        "editar_participante.html",
+        participante=participante,
+        funcoes=funcoes,
+        funcoes_selecionadas=funcoes_selecionadas
+    )
+
+
 # =========================
 # EVENTOS
 # =========================
@@ -1918,18 +1989,4 @@ def escala_mensal(id):
 
 
 if __name__ == "__main__":
-    app.run(
-        host="0.0.0.0",
-        port=5000,
-        debug=True
-    )
-
-
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
-
-
-
-
- 
+    app.run(host="0.0.0.0", port=5000, debug=False, use_reloader=False)

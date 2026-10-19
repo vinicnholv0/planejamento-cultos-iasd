@@ -467,3 +467,335 @@ button:hover{
     font-size:14px;
 
 }
+/* =========================================
+   CORREÇÃO RESPONSIVA - PLANEJAMENTO IASD
+========================================= */
+
+/* Evita que elementos ultrapassem a tela */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    overflow-x: clip;
+}
+
+img,
+video,
+iframe {
+    max-width: 100%;
+}
+
+input,
+select,
+textarea {
+    max-width: 100%;
+    font-size: 16px;
+}
+
+/* Botão e fundo do menu ficam ocultos no computador */
+.mobile-menu-toggle,
+.sidebar-overlay {
+    display: none;
+}
+
+/* Ajustes para celular e tablet */
+@media screen and (max-width: 768px) {
+
+    .layout {
+        display: block !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        min-height: 100vh;
+    }
+
+    /* Menu lateral fechado por padrão */
+    .sidebar {
+        position: fixed !important;
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        z-index: 1300 !important;
+
+        width: min(280px, 85vw) !important;
+        max-width: 85vw !important;
+        height: 100vh !important;
+        height: 100dvh !important;
+
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+
+        transform: translateX(-105%) !important;
+        transition: transform 0.25s ease !important;
+        box-shadow: none !important;
+    }
+
+    .sidebar.sidebar-open {
+        transform: translateX(0) !important;
+        box-shadow: 5px 0 25px rgba(0, 0, 0, 0.2) !important;
+    }
+
+    /* Botão ☰ */
+    .mobile-menu-toggle {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+
+        position: fixed !important;
+        top: 12px;
+        left: 12px;
+        z-index: 1400 !important;
+
+        width: 46px;
+        height: 46px;
+        padding: 0;
+        border: 0;
+        border-radius: 10px;
+
+        background: var(--primary, #2563eb);
+        color: #fff;
+        font-size: 28px;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+    }
+
+    /* Fundo escuro ao abrir o menu */
+    .sidebar-overlay.overlay-visible {
+        display: block !important;
+        position: fixed !important;
+        inset: 0;
+        z-index: 1250 !important;
+        background: rgba(0, 0, 0, 0.45);
+    }
+
+    /* Conteúdo usa a largura do celular */
+    .content {
+        display: block !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 72px 12px 16px !important;
+        overflow-x: clip;
+    }
+
+    .topbar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    .topbar > div,
+    .user-area,
+    .page-content,
+    .page-content > *,
+    .card,
+    .row,
+    [class*="col-"] {
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    .page-content {
+        width: 100%;
+        padding: 12px 0;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+        overflow-wrap: anywhere;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    /* Formulários adaptados à tela */
+    form {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    input,
+    select,
+    textarea {
+        width: 100%;
+        min-height: 44px;
+    }
+
+    button,
+    .btn {
+        max-width: 100%;
+        white-space: normal;
+    }
+
+    /* Tabelas podem rolar dentro da própria área */
+    .table-responsive {
+        max-width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    table {
+        max-width: 100%;
+    }
+
+    body.menu-aberto {
+        overflow: hidden;
+    }
+
+    .footer {
+        padding: 14px 8px;
+        font-size: 12px;
+        overflow-wrap: anywhere;
+    }
+}
+
+/* Celulares menores */
+@media screen and (max-width: 480px) {
+    .content {
+        padding-right: 10px !important;
+        padding-left: 10px !important;
+    }
+
+    h1 {
+        font-size: 1.35rem;
+    }
+
+    .mobile-menu-toggle {
+        width: 44px;
+        height: 44px;
+    }
+}
+
+/* Respeita a preferência por menos animações */
+@media (prefers-reduced-motion: reduce) {
+    .sidebar {
+        transition: none !important;
+    }
+}
+.participantes-tabela {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto !important;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x pan-y;
+}
+
+.participantes-tabela table {
+    width: max-content;
+    min-width: 100%;
+    margin-bottom: 0;
+    white-space: nowrap;
+}
+
+.participantes-tabela th,
+.participantes-tabela td {
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+@media (max-width: 768px) {
+    .participantes-tabela {
+        display: block;
+    }
+
+    .participantes-tabela table {
+        font-size: 14px;
+    }
+}
+/* CORREÇÃO DAS FUNÇÕES NO CADASTRO DE PARTICIPANTES */
+
+.form-participante .lista-funcoes {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+    width: 100%;
+}
+
+.form-participante .lista-funcoes .form-check {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    padding: 8px 12px 8px 36px;
+    margin: 0;
+    min-height: 42px;
+    width: 100%;
+}
+
+.form-participante .lista-funcoes .form-check-input {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    float: none;
+    width: 18px !important;
+    height: 18px;
+    min-height: 18px;
+    margin: 0 !important;
+    flex: 0 0 18px;
+    cursor: pointer;
+}
+
+.form-participante .lista-funcoes .form-check-label {
+    display: block;
+    margin: 0;
+    padding: 0;
+    line-height: 1.4;
+    cursor: pointer;
+}
+
+.form-participante .lista-funcoes .form-check-input:checked {
+    background-color: #198754;
+    border-color: #198754;
+}
+/* CORREÇÃO DO ALINHAMENTO DOS NOMES DAS FUNÇÕES */
+
+.form-participante .lista-funcoes .form-check {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 8px 12px !important;
+    padding-left: 12px !important;
+    margin: 0 !important;
+    gap: 10px;
+    min-height: 42px;
+    width: 100%;
+}
+
+.form-participante .lista-funcoes .form-check-input {
+    position: static !important;
+    display: block;
+    float: none !important;
+    transform: none !important;
+    margin: 0 !important;
+    width: 18px !important;
+    min-width: 18px;
+    height: 18px;
+    min-height: 18px;
+    flex-shrink: 0;
+}
+
+.form-participante .lista-funcoes .form-check-label {
+    display: block;
+    position: static;
+    margin: 0 !important;
+    padding: 0 !important;
+    text-indent: 0;
+    overflow: visible;
+    white-space: normal;
+    line-height: 1.4;
+}
